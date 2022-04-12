@@ -1,5 +1,6 @@
 import regex as re
 from underthesea import word_tokenize
+import pickle
  
 uniChars = "àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆĐÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴÂĂĐÔƠƯ"
 unsignChars = "aaaaaaaaaaaaaaaaaeeeeeeeeeeediiiiiooooooooooooooooouuuuuuuuuuuyyyyyAAAAAAAAAAAAAAAAAEEEEEEEEEEEDIIIOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYYAADOOU"
@@ -177,5 +178,10 @@ def remove_stopwords(line):
             words.append(word)
     return ' '.join(words)
 
-import pickle
 nb_model = pickle.load(open("svm.pkl", mode="rb"))
+
+def callmodel(doc):
+    doc = text_preprocess(doc)
+    doc = remove_stopwords(doc)
+    label = nb_model.predict([doc])
+    return label

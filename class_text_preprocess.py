@@ -178,10 +178,17 @@ def remove_stopwords(line):
             words.append(word)
     return ' '.join(words)
 
-nb_model = pickle.load(open("svm.pkl", mode="rb"))
+model_svm = pickle.load(open("svm.pkl", mode="rb"))
+labelLC = pickle.load(open("linear_classifier.pkl", mode="rb"))
 
-def callmodel(doc):
+def predictSVM(doc):
     doc = text_preprocess(doc)
     doc = remove_stopwords(doc)
-    label = nb_model.predict([doc])
-    return label
+    labelSVM = model_svm.predict([doc])
+    return labelSVM
+
+def predictLC(doc):
+    doc = text_preprocess(doc)
+    doc = remove_stopwords(doc)
+    labelLC = model_svm.predict([doc])
+    return labelLC

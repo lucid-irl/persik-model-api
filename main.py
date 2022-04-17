@@ -3,7 +3,7 @@ from flask import request
 from flask import jsonify
 import json
 
-from class_text_preprocess import callmodel
+from class_text_preprocess import predictSVM, predictLC
 
 app = Flask(__name__)
 
@@ -28,10 +28,8 @@ def get_article():
 @app.route("/predict")
 def predict_article():
     
-    
-    
     doc = article["des"]
-    lable = callmodel(doc)
+    lable = predictSVM(doc)
     return lable
 
 languages =[]

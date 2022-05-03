@@ -1,10 +1,4 @@
-from class_text_preprocess import callmodel
-
-doc = {"article": "kh\u00f4ng kh\u00f4ng th\u00eam v\u00e0 "}
-lable = callmodel(doc["article"])
-print(lable)
-
-
+from class_text_preprocess import predictSVM, predictLC
 
 data = """
 Chủ tịch tập đoàn Tân Hoàng Minh bị bắt
@@ -24,3 +18,10 @@ Sau khi trúng thầu, ông Dũng giải thích lo ngại mảnh đất đẹp n
 Đặt cọc 588,4 tỷ đồng, Tân Hoàng Minh ký hợp đồng mua bán 7 ngày sau phiên đấu giá. Đến ngày 10/1, Chủ tịch Tân Hoàng Minh bất ngờ xin đơn phương chấm dứt hợp đồng mua bán đấu giá lô đất 2,45 tỷ đồng một m2 ở Thủ Thiêm.
 
 Ông Dũng sau đó tâm thư gửi Tổng Bí thư Nguyễn Phú Trọng và các lãnh đạo Đảng, Nhà nước về việc xin bỏ cọc. Ông Dũng thừa nhận kết quả đấu giá hơn 2,4 tỷ đồng một m2 đất có thể dẫn đến những hệ luỵ không tốt cho thị trường" nên xin chấp nhận mọi chế tài về việc đơn phương chấm dứt hợp đồng. Ngày 28/1, Tân Hoàng Minh chính thức bỏ cọc."""
+
+doc = {"article": data}
+lable = predictSVM(doc["article"])
+print(lable)
+
+
+

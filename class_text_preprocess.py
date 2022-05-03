@@ -1,3 +1,4 @@
+from cProfile import label
 import regex as re
 from underthesea import word_tokenize
 import pickle
@@ -181,14 +182,16 @@ def remove_stopwords(line):
 model_svm = pickle.load(open("svm.pkl", mode="rb"))
 labelLC = pickle.load(open("linear_classifier.pkl", mode="rb"))
 
+labelList = ['__label__công_nghệ', '__label__du_lịch', '__label__giáo_dục', '__label__giải_trí', '__label__kinh_doanh', '__label__nhịp_sống', '__label__phim_ảnh', '__label__pháp_luật', '__label__sống_trẻ', '__label__sức_khỏe', '__label__thế_giới', '__label__thể_thao', '__label__thời_sự', '__label__thời_trang', '__label__xe_360', '__label__xuất_bản', '__label__âm_nhạc', '__label__ẩm_thực'] 
+
 def predictSVM(doc):
     doc = text_preprocess(doc)
     doc = remove_stopwords(doc)
     labelSVM = model_svm.predict([doc])
-    return labelSVM
+    return labelList[labelSVM[0] - 1]
 
 def predictLC(doc):
     doc = text_preprocess(doc)
     doc = remove_stopwords(doc)
     labelLC = model_svm.predict([doc])
-    return labelLC
+    return labelList[labelLC[0] - 1]
